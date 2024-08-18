@@ -1,0 +1,217 @@
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important; 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;  
+}
+
+.container {
+    flex: 1;
+}
+
+/* Google account-login-signup-auth---------------- */
+#auth-account{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    /* background-color: red; */
+    gap: 10px;
+}
+#auth-account a{
+    height: 3rem;
+    padding: 0px 20px;
+    width: auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    /* border: 1.5px solid grey; */
+    box-shadow: 0px 0px 3px black;
+    border-radius: 10px;
+}
+
+#auth-account a:hover{
+    box-shadow: 0px 0px 3px black;
+    border: 1.5px solid black;
+}
+#auth-account a:active{
+    transform: scale(.95);
+}
+#auth-account a img{
+    height: 30px;
+    width: 30px;
+}
+#auth-account a div{
+    font-size: 1.2rem;
+    color: black;
+    font-weight: 600;
+
+}
+
+@media (max-width: 576px) {
+    #auth-account a div{
+        font-size: 1.1rem;
+
+    }
+}
+@media (max-width: 385px) {
+    #auth-account a div{
+        font-size: .9rem;
+
+    }
+}
+
+/* Navbar */
+.navbar {
+    height: 4rem;
+    background-color: white;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+/* Hero Section */
+.hero {
+    height: 90vh;
+    margin-top: 1rem;
+    background-image: url('/images/hero-bg.jpg'); /* Update with the correct path */
+    background-size: cover; /* Ensures the image covers the entire hero section */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero .btn-primary {
+    padding: 10px 30px;
+    font-size: 1.2rem;
+    border-radius: 25px;
+    background-color: #3da2ef;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.hero .btn-primary:hover {
+    background-color: #3590d0;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .hero {
+        height: 60vh; /* Adjust height for smaller screens */
+    }
+}
+
+/* Features Section */
+.features {
+    background-color: #ffffff;
+    padding: 50px 0;
+}
+
+.features .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.features .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.features .card-body {
+    padding: 30px 20px;
+}
+
+.features .card i {
+    color: #3da2ef;
+    margin-bottom: 15px;
+}
+
+.features .card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.features .card-text {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 20px;
+}
+
+.features .btn-outline-primary {
+    color: #3da2ef;
+    border: 1px solid #3da2ef;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.features .btn-outline-primary:hover {
+    background-color: #3da2ef;
+    color: white;
+}
+
+/* Footer */
+.footer {
+    background-color: #222222;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer h5 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+}
+
+.footer a {
+    color: #3da2ef;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #1e90ff;
+}
+
+.footer .social a {
+    color: white;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+.footer .social a:hover {
+    color: #3da2ef;
+}
