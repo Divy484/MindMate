@@ -83,6 +83,14 @@ app.get("/", async(req, res) => {
 
 app.use("/", userRouter);
 
+app.get("/appointment", (req, res) => {
+    if(!req.user){
+        req.flash("error", "You must be logged in to MindMate!");
+        return res.redirect("/login");
+    }
+    res.send("Book an appointment");
+});
+
 //Custom Error Handler
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
