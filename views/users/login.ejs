@@ -1,29 +1,36 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="row mt-3">
-    <h1 class="col-6 offset-3">Login on MindMate</h1>
-    <div class="col-6 offset-3">
-        <form class="needs-validation" action="/login" method="post" novalidate>
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" id="username" name="username" class="form-control" required>
+<div class="background-container">
+    <div class="login-container">
+        <div class="login-form">
+            <h5>Welcome back !!!</h5>
+            <h1>Log In</h1>
+            <form class="needs-validation" action="/login" method="post" novalidate>
+                <label for="username" class="form-label">Username</label><br>
+                <input type="text" id="username" name="username" placeholder="@john123" required><br>
                 <div class="invalid-feedback">Username should be correct!</div>
-            </div>
 
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" name="password" class="form-control" required>
+                <label for="password" class="form-label">Password</label><br>
+                <input type="password" id="password" name="password" placeholder="************" required><br>
                 <div class="invalid-feedback">Password should be correct!</div>
-            </div>
 
-            <button class="btn btn-success">Login</button>
+                <button class="btn btn-success" type="submit">LOGIN</button>
 
-            <div id="auth-account" class="mb-3 mt-3">
-                <a href="/auth/google">
-                    <img src="/images/google.png" alt="google">
-                    <div>Login with Google</div>
-                </a>
-            </div>
-        </form>
+                <div class="social-login">
+                    <p>or continue with</p>
+                    <div id="auth-account" class="social-icons">
+                        <a href="/auth/google">
+                            <img src="/images/google.png" alt="Google">
+                            <div>Login with Google</div>
+                        </a>
+                    </div>
+                </div>
+                <p class="signup"><a class="signup text-decoration-none" href="/signup">Sign up for free</a></p>
+            </form>
+        </div>
+        <div class="login-image">
+            <img src="/images/person.png" alt="Person with laptop">
+            <img src="/images/cactus.png" alt="Cactus" class="cactus-image">
+        </div>
     </div>
 </div>

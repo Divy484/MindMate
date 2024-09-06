@@ -1,4 +1,4 @@
-<% layout("/layouts/boilerplate") %>
+<!-- <% layout("/layouts/boilerplate") %>
 
 <div class="row mt-3">
     <h1 class="col-6 offset-3">SignUp on MindMate</h1>
@@ -42,5 +42,52 @@
             </div>
 
         </form>
+    </div>
+</div> -->
+
+<% layout("/layouts/boilerplate") %>
+
+<div class="background-container">
+    <div class="login-container">
+        <div class="login-form">
+            <h5>Welcome to MindMate!</h5>
+            <h1>Sign Up</h1>
+            <form class="needs-validation" action="/signup" method="post" novalidate>
+                <label for="username" class="form-label">Username</label><br>
+                <input type="text" id="username" name="username" placeholder="@john123" required><br>
+                <div class="invalid-feedback">Username should be valid!</div>
+
+                <label for="email" class="form-label">Email</label><br>
+                <input type="email" id="email" name="email" placeholder="example@mail.com" required><br>
+                <div class="invalid-feedback">Please enter a valid Email!</div>
+
+                <label for="first_name" class="form-label">First Name</label><br>
+                <input type="text" id="first_name" name="first_name" placeholder="John" required><br>
+
+                <label for="last_name" class="form-label">Last Name</label><br>
+                <input type="text" id="last_name" name="last_name" placeholder="Doe" required><br>
+
+                <label for="password" class="form-label">Password</label><br>
+                <input type="password" id="password" name="password" placeholder="************" required><br>
+
+                <button class="btn btn-success" type="submit">Sign Up</button>
+
+                <div class="social-login">
+                    <p>or continue with</p>
+                    <div id="auth-account" class="social-icons">
+                        <a href="/auth/google">
+                            <img src="/images/google.png" alt="Google">
+                            <div>Sign Up with Google</div>
+                        </a>
+                    </div>
+                </div>
+
+                <p class="signup"><a class="signup text-decoration-none" href="/login">Already have an account? Log in</a></p>
+            </form>
+        </div>
+        <div class="login-image">
+            <img src="/images/person.png" alt="Person with laptop">
+            <img src="/images/cactus.png" alt="Cactus" class="cactus-image">
+        </div>
     </div>
 </div>
