@@ -15,6 +15,7 @@ const session = require("express-session");
 const ExpressError = require("./utils/ExpressError.js");
 const User = require("./models/user.js");
 const userRouter = require("./routes/user.js");
+const therapistRouter = require("./routes/therapist.js");
 require("./controllers/google.js");
 
 const port = process.env.PORT;
@@ -82,13 +83,10 @@ app.get("/", async(req, res) => {
 });
 
 app.use("/", userRouter);
+app.use("/appointment", therapistRouter);
 
-app.get("/appointment", (req, res) => {
-    if(!req.user){
-        req.flash("error", "You must be logged in to MindMate!");
-        return res.redirect("/login");
-    }
-    res.send("Book an appointment");
+app.get("/dashboard", (req, res) => {
+    res.render("therapist/dashboard.ejs");
 });
 
 //Custom Error Handler

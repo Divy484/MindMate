@@ -17,3 +17,20 @@
         }, false)
     })
 })()
+
+//Type Script for Quotes
+const typed = new Typed('.quote-text', {
+    strings: [
+        "Your mental health is a priority. Your happiness is essential. Your self-care is a necessity.",
+        "You don't have to control your thoughts. You just have to stop letting them control you.",
+        "It's okay to not be okay, but it's not okay to stay that way.",
+        "Healing takes time, and asking for help is a courageous step.",
+        "Mental health is not a destination but a process. It's about how you drive, not where you're going.",
+        "Your mind is a powerful thing. When you fill it with positive thoughts, your life will start to change.",
+        "You are not your illness. You have a story to tell. You have a name, a history, a personality. Staying yourself is part of the battle."
+    ],
+    typeSpeed: 60,
+    backSpeed: 30,
+    backDelay: 500,
+    loop: true
+});
