@@ -1,0 +1,87 @@
+<% layout("/layouts/boilerplate") %>
+
+<section class="mood-test-section">
+    <div class="container">
+        <h1 class="page-title">Mood Test</h1>
+        <p class="intro-text">Take this quick mood test to understand your current emotional state. Select the option that best reflects how you're feeling right now.</p>
+
+        <!-- Chatbot Section -->
+        <div class="chatbot-container">
+            <div class="chat-window" id="chat-window">
+                <!-- Chatbot conversation will appear here -->
+            </div>
+            <form action="/chat" method="post">
+                <div class="chat-input-container">
+                    <input type="text" id="chat-input" name="message" placeholder="Ask me anything about your mood..." />
+                    <button id="chat-send" type="submit">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Add some basic styles for chatbot */
+.chatbot-container {
+    margin-top: 40px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.chat-window {
+    height: 300px;
+    overflow-y: scroll;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.chat-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.chat-input-container button {
+    padding: 10px 20px;
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+</style>
+
+<script>
+document.getElementById('chat-send').addEventListener('click', async () => {
+    const userMessage = document.getElementById('chat-input').value;
+
+    if (userMessage.trim() === '') return;
+
+    // Append user message to chat window
+    const userHtml = `<div class="chat-message user"><strong>You:</strong> ${userMessage}</div>`;
+    document.getElementById('chat-window').innerHTML += userHtml;
+    document.getElementById('chat-input').value = '';
+
+    // Send message to server to get AI response
+    const response = await fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage })
+    });
+
+    const data = await response.json();
+    const botHtml = `<div class="chat-message bot"><strong>AI:</strong> ${data.response}</div>`;
+    document.getElementById('chat-window').innerHTML += botHtml;
+
+    // Scroll chat window to bottom
+    const chatWindow = document.getElementById('chat-window');
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+});
+</script>

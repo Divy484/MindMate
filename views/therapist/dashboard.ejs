@@ -1,22 +1,290 @@
+<% layout("/layouts/boilerplate") %>
+
 <style>
-    .image-container {
-        width: 100%;
-        margin-top: 20px;
-        overflow: hidden;
+
+    .container {
+        margin-top: 15px;
     }
 
-    .full-width-image {
-        aspect-ratio: 1.59;
-        object-fit: cover;
-        object-position: center;
+    .main-content {
+        display: flex;
+        gap: 20px;
+    }
+
+    .left-column {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .appointments {
+        background: linear-gradient(-109deg, #007E85 0%, #008E95 33%, #006E75 34%, #007E85 39%, #008E95 100%);
+        padding: 20px;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .appointments-content {
+        flex: 4;
+    }
+
+    .appointments-image {
+        flex: 1;
+        text-align: right;
+        display: flex;
+        align-items: center;
+    }
+
+    .appointments-image img {
+        width: 300px;
+        height: 300px;
+        border-radius: 12px;
+    }
+
+    .appointments::after {
+        content: '';
+        position: absolute;
+        right: -50px;
+        bottom: -50px;
+        width: 200px;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        opacity: 0.3;
+        border-radius: 50%;
+    }
+
+    .patient-cards {
+        display: flex;
+        margin-top: 50px;
+    }
+
+    .patient-card {
+        background-color: rgba(255, 255, 255, 0.55);
+        border-radius: 10px;
+        padding: 15px;
+        width: 40%;
+        text-align: left;
+        font-weight: 500;
+    }
+
+    .patient-card h3 {
+        margin: 0;
+        font-size: 1em;
+        font-weight: 500;
+    }
+
+    .patient-card h2 {
+        margin: 10px 0 0;
+        font-size: 2em;
+        font-weight: 500;
+        text-align: left;
+    }
+
+    .calendar {
+        flex: 2;
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .patient-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .patient-initials {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    .patient-time {
+        margin-left: auto;
+        padding: 5px 10px;
+        border-radius: 15px;
+    }
+
+    .calendar table {
         width: 100%;
-        min-height: 20px;
-        min-width: 20px;
+        border-collapse: collapse;
+    }
+
+    .calendar th,
+    .calendar td {
+        text-align: center;
+        padding: 5px;
+    }
+
+    .calendar .highlight {
+        color: red;
+        font-weight: bold;
+    }
+
+    .upcoming {
+        margin-top: 20px;
+    }
+
+    .upcoming-item {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .upcoming-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #4db6ac;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
     }
 </style>
 
-<section class="image-container">
-    <img loading="lazy"
-        src="https://cdn.builder.io/api/v1/image/assets%2Ff83eba3fcad646e1b9247f53a10d2136%2F467a0106bc8e4504a3dc4ba57d1e9f99"
-        class="full-width-image" alt="" />
-</section>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js"></script>
+
+<div class="container">
+
+    <h1>Good Morning <span style="color: #4db6ac;">John</span> !</h1>
+
+    <div class="main-content">
+        <div class="left-column">
+            <div class="appointments">
+                <div class="appointments-content">
+                    <h2>Appointments for today</h2>
+                    <h1 style="font-size: 4em; margin: 0; font-weight: 500;">6</h1>
+                    <div class="patient-cards">
+                        <div class="patient-card" style="margin-right: 10px;">
+                            <h3>New Patients</h3>
+                            <h2>4</h2>
+                        </div>
+                        <div class="patient-card">
+                            <h3>Old Patients</h3>
+                            <h2>20</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="appointments-image">
+                    <img src="images/doctor.png?height=200&width=200" alt="Doctor">
+                </div>
+
+            </div>
+
+            <div class="patient-list">
+                <h2>Patient List</h2>
+                <div class="patient-item">
+                    <div class="patient-initials" style="background-color: #ffcccb;">SM</div>
+                    <div>
+                        <strong>Stacy Mitchell</strong><br>
+                        <small>Weekly Visit</small>
+                    </div>
+                    <div class="patient-time" style="background-color: #ffcccb;">9:15 AM</div>
+                </div>
+                <div class="patient-item">
+                    <div class="patient-initials" style="background-color: #e6e6fa;">AD</div>
+                    <div>
+                        <strong>Amy Dunham</strong><br>
+                        <small>Routine Checkup</small>
+                    </div>
+                    <div class="patient-time" style="background-color: #e6e6fa;">9:30 AM</div>
+                </div>
+                <div class="patient-item">
+                    <div class="patient-initials" style="background-color: #e0ffff;">DJ</div>
+                    <div>
+                        <strong>Demi Joan</strong><br>
+                        <small>New Patient</small>
+                    </div>
+                    <div class="patient-time" style="background-color: #e0ffff;">9:50 AM</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="calendar">
+            <h2>Calendar</h2>
+            <p>September 2022</p>
+            <table>
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td class="highlight">8</td>
+                    <td>9</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td class="highlight">14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td></td>
+                </tr>
+            </table>
+
+            <div class="upcoming">
+                <h3>Upcoming</h3>
+                <div class="upcoming-item">
+                    <div class="upcoming-icon">M</div>
+                    <div>
+                        <strong>Monthly doctor's meet</strong><br>
+                        <small>8 April, 2021 | 04:00 PM</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

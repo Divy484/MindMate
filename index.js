@@ -89,6 +89,18 @@ app.get("/dashboard", (req, res) => {
     res.render("therapist/dashboard.ejs");
 });
 
+app.get("/quotes", (req, res) => {
+    res.render("explore-quotes.ejs");
+});
+
+app.get("/exercise", (req, res) => {
+    res.render("exercise.ejs");
+});
+
+app.get("/mood-test", (req, res) => {
+    res.render("mood-test.ejs");
+});
+
 //Custom Error Handler
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
