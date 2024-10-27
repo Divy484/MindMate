@@ -16,6 +16,7 @@ const ExpressError = require("./utils/ExpressError.js");
 const User = require("./models/user.js");
 const userRouter = require("./routes/user.js");
 const therapistRouter = require("./routes/therapist.js");
+const chatbotRouter = require("./routes/chatbot.js");
 require("./controllers/google.js");
 
 const port = process.env.PORT;
@@ -34,6 +35,7 @@ async function main() {
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "/public")));
 
@@ -84,6 +86,7 @@ app.get("/", async(req, res) => {
 
 app.use("/", userRouter);
 app.use("/appointment", therapistRouter);
+app.use("/chat", chatbotRouter);
 
 app.get("/dashboard", (req, res) => {
     res.render("therapist/dashboard.ejs");
@@ -95,10 +98,6 @@ app.get("/quotes", (req, res) => {
 
 app.get("/exercise", (req, res) => {
     res.render("exercise.ejs");
-});
-
-app.get("/mood-test", (req, res) => {
-    res.render("mood-test.ejs");
 });
 
 //Custom Error Handler
