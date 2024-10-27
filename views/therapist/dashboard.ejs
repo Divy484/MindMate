@@ -125,6 +125,7 @@
         </div>
     </div>
 
+    <% if ( todaysAppointments.length > 0) { %>
     <div class="appointments-section">
         <h2>Today's Appointments</h2>
         <% todaysAppointments.forEach(appointment => { %>
@@ -145,6 +146,7 @@
             </div>
         <% }) %>
     </div>
+    <% } %>
 </div>
 
 <script>
