@@ -1,290 +1,172 @@
 <% layout("/layouts/boilerplate") %>
 
 <style>
-
-    .container {
-        margin-top: 15px;
-    }
-
-    .main-content {
-        display: flex;
-        gap: 20px;
-    }
-
-    .left-column {
-        flex: 3;
+    .dashboard-container {
+        margin: 20px;
         display: flex;
         flex-direction: column;
         gap: 20px;
     }
 
-    .appointments {
-        background: linear-gradient(-109deg, #007E85 0%, #008E95 33%, #006E75 34%, #007E85 39%, #008E95 100%);
+    .stats-container {
+        display: flex;
+        justify-content: space-around;
+        gap: 20px;
+    }
+
+    .stat-card {
+        flex: 1;
+        background: linear-gradient(135deg, #007E85, #008E95);
+        color: white;
         padding: 20px;
-        border-radius: 10px;
-        position: relative;
-        overflow: hidden;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-card h3 {
+        font-size: 1.2em;
+        margin: 0;
+    }
+
+    .stat-card h1 {
+        font-size: 3em;
+        font-weight: bold;
+        margin: 10px 0 0;
+    }
+
+    .appointments-section,
+    .chat-section {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .appointments-section h2,
+    .chat-section h2 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    .appointment-item {
         display: flex;
         justify-content: space-between;
-    }
-
-    .appointments-content {
-        flex: 4;
-    }
-
-    .appointments-image {
-        flex: 1;
-        text-align: right;
-        display: flex;
-        align-items: center;
-    }
-
-    .appointments-image img {
-        width: 300px;
-        height: 300px;
-        border-radius: 12px;
-    }
-
-    .appointments::after {
-        content: '';
-        position: absolute;
-        right: -50px;
-        bottom: -50px;
-        width: 200px;
-        height: 200px;
-        background-size: cover;
-        background-position: center;
-        opacity: 0.3;
-        border-radius: 50%;
-    }
-
-    .patient-cards {
-        display: flex;
-        margin-top: 50px;
-    }
-
-    .patient-card {
-        background-color: rgba(255, 255, 255, 0.55);
-        border-radius: 10px;
-        padding: 15px;
-        width: 40%;
-        text-align: left;
-        font-weight: 500;
-    }
-
-    .patient-card h3 {
-        margin: 0;
-        font-size: 1em;
-        font-weight: 500;
-    }
-
-    .patient-card h2 {
-        margin: 10px 0 0;
-        font-size: 2em;
-        font-weight: 500;
-        text-align: left;
-    }
-
-    .calendar {
-        flex: 2;
-        background-color: white;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .patient-item {
-        display: flex;
         align-items: center;
         margin-bottom: 10px;
     }
 
-    .patient-initials {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 10px;
-        font-weight: bold;
+    .appointment-item div {
+        flex: 1;
+        text-align: left;
     }
 
-    .patient-time {
-        margin-left: auto;
-        padding: 5px 10px;
-        border-radius: 15px;
+    .appointment-time {
+        font-size: 1em;
+        color: #666;
     }
 
-    .calendar table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .calendar th,
-    .calendar td {
+    .chat-section .chat-placeholder {
+        color: #888;
         text-align: center;
-        padding: 5px;
+        font-size: 1em;
+        margin-top: 50px;
     }
 
-    .calendar .highlight {
-        color: red;
-        font-weight: bold;
-    }
-
-    .upcoming {
-        margin-top: 20px;
-    }
-
-    .upcoming-item {
-        display: flex;
-        align-items: center;
-        margin-top: 10px;
-    }
-
-    .upcoming-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #4db6ac;
+    .completion-button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1em;
         color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .completion-button.incomplete {
+        background-color: #007BFF; /* Primary color for incomplete */
+    }
+
+    .completion-button.completed {
+        background-color: #28A745; /* Green color for completed */
+    }
+
+    .completion-button:hover {
+        transform: translateY(-2px);
+    }
+
+    .completion-button:focus {
+        outline: none;
     }
 </style>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js"></script>
+<div class="dashboard-container">
+    <h1>Doctor's Dashboard</h1>
 
-<div class="container">
-
-    <h1>Good Morning <span style="color: #4db6ac;">John</span> !</h1>
-
-    <div class="main-content">
-        <div class="left-column">
-            <div class="appointments">
-                <div class="appointments-content">
-                    <h2>Appointments for today</h2>
-                    <h1 style="font-size: 4em; margin: 0; font-weight: 500;">6</h1>
-                    <div class="patient-cards">
-                        <div class="patient-card" style="margin-right: 10px;">
-                            <h3>New Patients</h3>
-                            <h2>4</h2>
-                        </div>
-                        <div class="patient-card">
-                            <h3>Old Patients</h3>
-                            <h2>20</h2>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="appointments-image">
-                    <img src="images/doctor.png?height=200&width=200" alt="Doctor">
-                </div>
-
-            </div>
-
-            <div class="patient-list">
-                <h2>Patient List</h2>
-                <div class="patient-item">
-                    <div class="patient-initials" style="background-color: #ffcccb;">SM</div>
-                    <div>
-                        <strong>Stacy Mitchell</strong><br>
-                        <small>Weekly Visit</small>
-                    </div>
-                    <div class="patient-time" style="background-color: #ffcccb;">9:15 AM</div>
-                </div>
-                <div class="patient-item">
-                    <div class="patient-initials" style="background-color: #e6e6fa;">AD</div>
-                    <div>
-                        <strong>Amy Dunham</strong><br>
-                        <small>Routine Checkup</small>
-                    </div>
-                    <div class="patient-time" style="background-color: #e6e6fa;">9:30 AM</div>
-                </div>
-                <div class="patient-item">
-                    <div class="patient-initials" style="background-color: #e0ffff;">DJ</div>
-                    <div>
-                        <strong>Demi Joan</strong><br>
-                        <small>New Patient</small>
-                    </div>
-                    <div class="patient-time" style="background-color: #e0ffff;">9:50 AM</div>
-                </div>
-            </div>
+    <div class="stats-container">
+        <div class="stat-card" id="total-appointments">
+            <h3>Total Appointments</h3>
+            <h1><%= totalAppointments %></h1>
         </div>
-
-        <div class="calendar">
-            <h2>Calendar</h2>
-            <p>September 2022</p>
-            <table>
-                <tr>
-                    <th>Sun</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td class="highlight">8</td>
-                    <td>9</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                    <td>12</td>
-                    <td>13</td>
-                    <td class="highlight">14</td>
-                    <td>15</td>
-                    <td>16</td>
-                    <td>17</td>
-                </tr>
-                <tr>
-                    <td>18</td>
-                    <td>19</td>
-                    <td>20</td>
-                    <td>21</td>
-                    <td>22</td>
-                    <td>23</td>
-                    <td>24</td>
-                </tr>
-                <tr>
-                    <td>25</td>
-                    <td>26</td>
-                    <td>27</td>
-                    <td>28</td>
-                    <td>29</td>
-                    <td>30</td>
-                    <td></td>
-                </tr>
-            </table>
-
-            <div class="upcoming">
-                <h3>Upcoming</h3>
-                <div class="upcoming-item">
-                    <div class="upcoming-icon">M</div>
-                    <div>
-                        <strong>Monthly doctor's meet</strong><br>
-                        <small>8 April, 2021 | 04:00 PM</small>
-                    </div>
-                </div>
-            </div>
+        <div class="stat-card" id="completed-appointments">
+            <h3>Completed Appointments</h3>
+            <h1 id="completed-appointments-count"><%= completedAppointments %></h1>
+        </div>        
+        <div class="stat-card" id="upcoming-appointments">
+            <h3>Upcoming Appointments</h3>
+            <h1><%= upcomingAppointments %></h1>
+        </div>
+        <div class="stat-card" id="todays-appointments">
+            <h3>Today's Appointments</h3>
+            <h1><%= todaysAppointments.length %></h1>
         </div>
     </div>
+
+    <div class="appointments-section">
+        <h2>Today's Appointments</h2>
+        <% todaysAppointments.forEach(appointment => { %>
+            <div class="appointment-item">
+                <div>
+                    <strong><%= appointment.name %></strong><br>
+                    <span><%= appointment.therapist %></span>
+                </div>
+                <div class="appointment-time">
+                    <%= new Date(appointment.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %>
+                </div>
+                <div>
+                    <button class="completion-button <%= appointment.isCompleted ? 'completed' : 'incomplete' %>"
+                            onclick="toggleCompletion('<%= appointment._id %>', '<%= appointment.isCompleted %>')">
+                        <%= appointment.isCompleted ? 'Completed' : 'Mark as Completed' %>
+                    </button>
+                </div>
+            </div>
+        <% }) %>
+    </div>
 </div>
+
+<script>
+    async function toggleCompletion(appointmentId, currentStatus) {
+        try {
+            const response = await fetch(`/doctor/${appointmentId}/toggle-completion`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ isCompleted: !currentStatus }) // Toggle the current status
+            });
+
+            if (response.ok) {
+                const updatedAppointment = await response.json();
+                // Optionally, you can refresh the appointments or update the UI here
+                location.reload(); // Reload the page to see the updated status
+            } else {
+                console.error('Failed to update appointment status');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+</script>

@@ -35,9 +35,22 @@ router.route("/login")
 .get((req, res) => {
     res.render("users/login.ejs");
 })
-.post(passport.authenticate("local", { failureRedirect: "/login", failureFlash: true }), async(req, res) => {
-    req.flash("success", "Welcome back to MindMate!");
-    res.redirect("/");
+.post((req, res, next) => {
+    passport.authenticate("local", (err, user, info) => {
+        if (err) return next(err);
+        if (!user) {
+            req.flash("error", "Invalid username or password");
+            return res.redirect("/login");
+        }
+        req.login(user, (err) => {
+            if (err) return next(err);
+
+            // Redirect based on role
+            const redirectUrl = user.role === "doctor" ? "/doctor/dashboard" : "/";
+            req.flash("success", `Welcome back, ${user.role === "doctor" ? user.username : user.username}!`);
+            res.redirect(redirectUrl);
+        });
+    })(req, res, next);
 });
 
 router.get("/logout", (req, res, next) => {

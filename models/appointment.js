@@ -24,6 +24,10 @@ const appointmentSchema = new Schema({
     },
     message: {
         type: String
+    },
+    isCompleted: {
+        type: Boolean,
+        default: false
     }
 });
 

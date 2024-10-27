@@ -17,6 +17,7 @@ const User = require("./models/user.js");
 const userRouter = require("./routes/user.js");
 const therapistRouter = require("./routes/therapist.js");
 const chatbotRouter = require("./routes/chatbot.js");
+const dashboardRouter = require("./routes/dashboard.js");
 require("./controllers/google.js");
 
 const port = process.env.PORT;
@@ -87,10 +88,7 @@ app.get("/", async(req, res) => {
 app.use("/", userRouter);
 app.use("/appointment", therapistRouter);
 app.use("/chat", chatbotRouter);
-
-app.get("/dashboard", (req, res) => {
-    res.render("therapist/dashboard.ejs");
-});
+app.use("/doctor", dashboardRouter);
 
 app.get("/quotes", (req, res) => {
     res.render("explore-quotes.ejs");
