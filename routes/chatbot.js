@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const wrapAsync = require('../utils/wrapAsync');
-require('dotenv').config();
 
-const genAI = new GoogleGenerativeAI("AIzaSyAyt1N80T1pM611a-aPEGdEoHQkHAVNmpc");
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
 // Initialize conversation history
