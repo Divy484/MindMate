@@ -38,7 +38,7 @@ router.route("/")
 
         res.json({ response: aiResponse });
     } catch (e) {
-        console.error(e);
+        console.log(e);
         res.status(500).json({ response: 'Sorry, something went wrong with the AI response.' });
     }
 }));
