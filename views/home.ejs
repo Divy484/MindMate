@@ -118,6 +118,27 @@
     </div>
 </section>
 
+<!-- News Section -->
+<section class="news-section py-5">
+    <h2 class="section-title">Mental Health News</h2>
+    <div class="container">
+        <div class="row">
+            <% articles.forEach(article => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="<%= article.urlToImage %>" class="card-img-top" alt="News Image">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= article.title %></h5>
+                            <p class="card-text"><%= article.description %></p>
+                            <a href="<%= article.url %>" target="_blank" class="btn btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</section>
+
 <!-- Contact Section -->
 <section class="contact-section" id="contact">
   <h2 class="section-title">Get In Touch</h2>
@@ -148,6 +169,11 @@
     </div>
   </div>
 </section>
+
+<!-- Floating Chat Icon -->
+<div class="chat-icon" onclick="openChat()">
+    <i class="fa-solid fa-headset"></i>
+</div>
 
 <!--Scroll Reveal JS-->
 <script src="https://unpkg.com/scrollreveal"></script>

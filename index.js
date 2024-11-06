@@ -11,6 +11,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const session = require("express-session");
+const axios = require("axios");
 
 const ExpressError = require("./utils/ExpressError.js");
 const User = require("./models/user.js");
@@ -69,19 +70,32 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get("/", async(req, res) => {
-    if (req.user) {
-        if (!req.isAuthenticated()) {
-            req.flash("error", "You must be logged in to MindMate!");
-            return res.redirect("/login");
+app.get("/", async (req, res) => {
+    try {
+        const newsapi = process.env.NEWSAPI;
+        
+        const response = await axios.get(`https://newsapi.org/v2/everything?q=mental-health&apiKey=${newsapi}`);
+        let articles = response.data.articles;
+
+        articles = articles.sort(() => 0.5 - Math.random()).slice(0, 9);
+        
+        if (req.user) {
+            if (!req.isAuthenticated()) {
+                req.flash("error", "You must be logged in to MindMate!");
+                return res.redirect("/login");
+            } else {
+                let email = req.user.email;
+                let user = await User.findOne({ email: email });
+                let username = user.username;
+                res.render("home.ejs", { username, articles });
+            }
         } else {
-            let email = req.user.email;
-            let user = await User.findOne({ email: email });
-            let username = user.username;
-            res.render("home.ejs", { username });
+            res.render("home.ejs", { articles });
         }
-    } else {
-        res.render("home.ejs");
+    } catch (error) {
+        console.error("Error fetching articles: ", error);
+        req.flash("error", "Unable to fetch live news at the moment.");
+        res.render("home.ejs", { articles: [] });
     }
 });
 

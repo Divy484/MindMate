@@ -1,4 +1,4 @@
-<% layout("/layouts/boilerplate") %>
+<% layout("/layouts/boilerplate-doctor") %>
 
 <style>
     .dashboard-container {
@@ -104,7 +104,7 @@
 </style>
 
 <div class="dashboard-container">
-    <h1>Doctor's Dashboard</h1>
+    <h1><%= doctorName %>'s Dashboard</h1>
 
     <div class="stats-container">
         <div class="stat-card" id="total-appointments">
@@ -147,6 +147,12 @@
         <% }) %>
     </div>
     <% } %>
+
+    <!-- Floating Chat Icon -->
+    <!-- <div class="chat-icon" onclick="toggleChatOverlay()">
+        <i class="fa-solid fa-headset"></i>
+    </div> -->
+    
 </div>
 
 <script>

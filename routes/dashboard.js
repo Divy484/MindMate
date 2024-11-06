@@ -35,6 +35,7 @@ router.get('/dashboard', isDoctor, async (req, res) => {
         }).countDocuments();
         
         res.render('therapist/dashboard', {
+            doctorName,
             totalAppointments,
             completedAppointments,
             upcomingAppointments,

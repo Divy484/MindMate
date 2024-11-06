@@ -34,3 +34,8 @@ const typed = new Typed('.quote-text', {
     backDelay: 500,
     loop: true
 });
+
+//Floating chat
+function openChat(){
+    window.location.href = "/chat";
+}

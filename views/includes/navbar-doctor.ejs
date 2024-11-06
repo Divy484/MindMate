@@ -1,0 +1,90 @@
+<style>
+    .btn-search {
+        background-color: #3da2ef;
+        color: white;
+        border-radius: 25px;
+        padding: 0 1rem 0 1rem;
+    }
+
+    .btn-search:hover {
+        background-color: #3da2ef;
+        color: white;
+    }
+
+    .btn-search i {
+        display: inline;
+        margin-right: 0.5rem;
+    }
+
+    .search-input {
+        border-radius: 25px;
+        padding: 0.5rem 3rem 0.5rem 3rem;
+    }
+
+    .btn-login {
+        background-color: #3da2ef;
+        color: white;
+        border-radius: 25px;
+        padding: 0 0.5rem 0 0.5rem;
+    }
+
+    .btn-login:hover {
+        background-color: #3da2ef;
+        color: white;
+    }
+
+    .btn-login i {
+        display: inline;
+        margin-right: 0.5rem;
+    }
+
+    .btn-login a {
+        color: white;
+    }
+
+    .btn-login a:hover {
+        color: black;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/doctor/dashboard">
+            <img class="logo" src="/images/logo-1.gif" alt="logo">
+        </a>
+        <!-- <a class="navbar-brand" href="/"><i class="fa-regular fa-compass"></i></a> -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+            <div class="navbar-nav ms-auto">
+                <a class="nav-menu text-black text-decoration-none" href="/doctor/dashboard">Home</a>
+            </div>
+
+            <div class="navbar-nav ms-auto">
+                <a class="nav-menu text-black text-decoration-none" href="#about">About us</a>
+            </div>
+
+            <div class="navbar-nav ms-auto">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2 search-input" type="search" placeholder="Search in MindMate">
+                    <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+                </form>
+            </div>
+
+            <div class="navbar-nav ms-auto">
+                <% if(!currUser) { %>
+                    <button class="btn btn-login me-3"><a class="nav-link" href="/signup"><i class="fa-regular fa-circle-user"></i>Sign up</a></button>
+                    <!-- <a class="nav-link" href="/signup"><b>Sign up</b></a> -->
+                    <button class="btn btn-login"><a class="nav-link" href="/login"><i class="fa-regular fa-circle-user"></i>Log in</a></button>
+                    <!-- <a class="nav-link" href="/login"><b>Log in</b></a> -->
+                <% } %>
+                <% if(currUser) { %>
+                    <!-- <a class="nav-link" href="/logout">Log out</a> -->
+                    <button class="btn btn-login"><a class="nav-link" href="/logout"><i class="fa-regular fa-circle-user"></i>Log out</a></button>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</nav>
