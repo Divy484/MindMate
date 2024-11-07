@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const User = require("../models/user.js");
+const Message = require("../models/message.js");
 const passport = require("passport");
 
 function isLoggedIn (req, res, next) {
@@ -22,7 +23,7 @@ router.route("/signup")
             if(err) {
                 return next(err);
             }
-            req.flash("success", "Welcome to MindMate!");
+            req.flash("success", `Welcome to MindMate, ${username}!`);
             res.redirect("/");
         });
     } catch(err) {
@@ -79,7 +80,7 @@ router.get("/auth/protected", isLoggedIn, async (req, res) => {
 
         const existingUser = await User.findOne({email : email});
         if (existingUser) {
-            req.flash("success", "Welcome back to MindMate!");
+            req.flash("success", `Welcome to MindMate, ${username}!`);
             res.redirect("/");
         }
         else {
@@ -91,7 +92,7 @@ router.get("/auth/protected", isLoggedIn, async (req, res) => {
             });
             console.log(user);
             await user.save();
-            req.flash("success", "Welcome to MindMate!");
+            req.flash("success", `Welcome to MindMate, ${username}!`);
             res.redirect("/");
         }
     } catch (err) {
@@ -102,6 +103,63 @@ router.get("/auth/protected", isLoggedIn, async (req, res) => {
 
 router.get("/auth/google/failure", (req, res) => {
     res.send("something went wrong!!");
+});
+
+// Route to display chat options for the user
+router.get("/chat", async (req, res) => {
+    if(!req.user){
+        req.flash("error", "You must be logged in to MindMate!");
+        return res.redirect("/login");
+    }
+    const doctors = await User.find({ role: "doctor" });
+    res.render("doctor-list", { doctors });
+});
+
+// Route to initiate a chat with a doctor
+router.get("/chat/:doctorId", async (req, res) => {
+    if(!req.user){
+        req.flash("error", "You must be logged in to MindMate!");
+        return res.redirect("/login");
+    }
+    const doctorId = req.params.doctorId;
+    const username = req.user.displayName || req.user.username;
+    
+    const user = await User.findOne({ username: username }); 
+    const userId = user._id;
+    const doctor = await User.findById(doctorId);
+    const doctorName = doctor.username;
+
+    // Fetch previous messages between the user and doctor if they exist
+    const messages = await Message.find({
+        $or: [
+            { sender: userId, receiver: doctorId },
+            { sender: doctorId, receiver: userId }
+        ]
+    }).sort({ date: 1 });
+
+    res.render("chat-room", { messages, doctorId, userId, doctorName });
+});
+
+// Route to send a message from the user to the doctor
+router.post("/chat/:doctorId", async (req, res) => {
+    if(!req.user){
+        req.flash("error", "You must be logged in to MindMate!");
+        return res.redirect("/login");
+    }
+    const { message } = req.body;
+    const username = req.user.displayName || req.user.username;
+    
+    const userId = await User.findOne({ username: username });
+    const doctorId = req.params.doctorId;
+
+    const newMessage = new Message({
+        sender: userId._id,
+        receiver: doctorId,
+        message
+    });
+
+    await newMessage.save();
+    res.redirect(`/chat/${doctorId}`);
 });
 
 module.exports = router;

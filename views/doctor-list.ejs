@@ -1,0 +1,16 @@
+<% layout("/layouts/boilerplate") %>
+
+<section class="therapist-section">
+    <h2 class="therapist-title">Chat with a Doctor</h2>
+    <div class="therapist-grid">
+        <% doctors.forEach(doctor => { %>
+            <a href="/chat/<%= doctor._id %>" class="text-decoration-none">
+                <div style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); height: 150px; padding: 20px;">
+                    <h3 class="therapist-name"><%= doctor.username %></h3>
+                    <p class="therapist-role">Therapist</p>
+                    <a href="/chat/<%= doctor._id %>" class="connect-btn text-decoration-none">Chat</a>
+                </div>
+            </a>
+        <% }) %>
+    </div>
+</section>

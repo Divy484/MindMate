@@ -37,5 +37,5 @@ const typed = new Typed('.quote-text', {
 
 //Floating chat
 function openChat(){
-    window.location.href = "/chat";
+    window.location.href = "/chatbot";
 }

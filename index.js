@@ -101,7 +101,7 @@ app.get("/", async (req, res) => {
 
 app.use("/", userRouter);
 app.use("/appointment", therapistRouter);
-app.use("/chat", chatbotRouter);
+app.use("/chatbot", chatbotRouter);
 app.use("/doctor", dashboardRouter);
 
 app.get("/quotes", (req, res) => {

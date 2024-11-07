@@ -1,0 +1,77 @@
+<% layout("/layouts/boilerplate-doctor") %>
+
+<style>
+    .doctor-chat-section {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f4f6f8;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    .doctor-chat-title {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .chat-user-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .chat-user {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .chat-user-card {
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .chat-user-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-name {
+        font-size: 1.3rem;
+        color: #007bff;
+        margin: 0;
+    }
+
+    .last-message {
+        font-size: 1rem;
+        color: #555;
+        margin-top: 5px;
+    }
+</style>
+
+<section class="doctor-chat-section">
+    <h2 class="doctor-chat-title">Chats with Users</h2>
+    <div class="chat-user-list">
+        <% users.forEach(user => { %>
+            <a href="/doctor/chat/<%= user._id %>" class="chat-user">
+                <div class="chat-user-card">
+                    <h3 class="user-name"><%= user.userInfo.username %></h3>
+                    <p class="last-message">
+                        <% if (user.lastMessage.length > 30) { %>
+                            <%= user.lastMessage.substring(0, 30) %>...
+                        <% } else { %>
+                            <%= user.lastMessage %>
+                        <% } %>
+                    </p>
+                </div>
+            </a>
+        <% }) %>
+    </div>
+</section>
