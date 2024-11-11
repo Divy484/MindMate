@@ -15,7 +15,7 @@ router.route("/")
         req.flash("error", "You must be logged in to MindMate!");
         return res.redirect("/login");
     }
-    res.render("mood-test.ejs");
+    res.render("chatbot.ejs");
 })
 .post(wrapAsync(async (req, res) => {
     const userMessage = req.body.message;

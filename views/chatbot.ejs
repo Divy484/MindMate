@@ -142,7 +142,7 @@ document.getElementById('chat-form').addEventListener('submit', async (event) =>
     document.getElementById('chat-input').value = '';
 
     // Send message to the server
-    const response = await fetch('/chat', {
+    const response = await fetch('/chatbot', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userMessage })
@@ -163,6 +163,6 @@ document.getElementById('new-chat').addEventListener('click', async () => {
     document.getElementById('chat-window').innerHTML = '';
 
     // Send request to clear conversation history on the server
-    await fetch('/chat/clear', { method: 'POST' });
+    await fetch('/chatbot/clear', { method: 'POST' });
 });
 </script>
