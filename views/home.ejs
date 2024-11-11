@@ -86,7 +86,7 @@
                 <h2 class="service-title">Direct Counseling</h2>
                 <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/da34b5a15a573c985b337ed118a48cf15762e2eac3f0895c10f58224ee283909?placeholderIfAbsent=true&apiKey=f83eba3fcad646e1b9247f53a10d2136"
                     alt="Direct counseling icon" class="service-icon" />
-                <a href="/appointment" class="find-therapist-link">
+                <a href="/chat" class="find-therapist-link">
                     <span class="find-therapist-text">Find therapist</span>
                     <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/999007aa4db824a6365a3f3419f01db3ed09c515506db3d4ee4a5f29dabee4f7?placeholderIfAbsent=true&apiKey=f83eba3fcad646e1b9247f53a10d2136"
                         alt="Arrow" class="arrow-icon" />
@@ -137,6 +137,60 @@
             <% }) %>
         </div>
     </div>
+</section>
+
+<!-- Mental Health Resources Section -->
+<section class="resources py-3">
+    <div class="container">
+        <div class="row text-center">
+            <!-- Blogs Section -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fa-solid fa-book-open fa-2x mb-3"></i>
+                        <h5 class="card-title">Mental Health Blogs</h5>
+                        <p class="card-text">Explore informative articles and insights on mental wellness.</p>
+                        <button onclick="openUrl('https://psychcentral.com/blog')" class="btn btn-outline-primary">Read Blogs</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Podcasts Section -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fa-solid fa-podcast fa-2x mb-3"></i>
+                        <h5 class="card-title">Mental Health Podcasts</h5>
+                        <p class="card-text">Listen to experts discuss mental health topics and practices.</p>
+                        <button onclick="openUrl('https://www.healthline.com/health/mental-health-podcast')" class="btn btn-outline-primary">Listen Now</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Conferences Section -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fa-solid fa-chalkboard-teacher fa-2x mb-3"></i>
+                        <h5 class="card-title">Mental Health Conferences</h5>
+                        <p class="card-text">Find conferences to connect with professionals and resources.</p>
+                        <button onclick="openUrl('https://mentalhealth.cmesociety.com/')" class="btn btn-outline-primary">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Emergency Section -->
+<section class="emergency-help py-5">
+    <h2 class="section-title">Feeling Low? We’re Here for You</h2>
+    <p class="section-subtitle">Remember, you are not alone. Here are some resources to help you right now.</p>
+        
+    <div class="container text-center">
+        <a href="tel:+1234567890" class="btn btn-danger mb-3">Call the Crisis Hotline</a>
+        <button class="btn btn-outline-primary mb-3" onclick="openExercise()">Try a Breathing Exercise</button>
+    </div>
+        
+    <p class="section-subtitle mt-4">"This moment will pass. Take a deep breath, and remember you are stronger than you think."</p>
 </section>
 
 <!-- Contact Section -->

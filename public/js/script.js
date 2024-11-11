@@ -39,3 +39,13 @@ const typed = new Typed('.quote-text', {
 function openChat(){
     window.location.href = "/chatbot";
 }
+
+// JavaScript function to open URLs
+function openUrl(url) {
+    window.location.href = url;
+}
+
+//Emergency Section
+function openExercise() {
+    window.location.href = "/exercise";
+}

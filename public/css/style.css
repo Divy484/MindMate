@@ -765,3 +765,10 @@ input, select, textarea {
 .chat-icon:hover {
     transform: scale(1.1);
 }
+
+/* Emergency section */
+.emergency-help {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
